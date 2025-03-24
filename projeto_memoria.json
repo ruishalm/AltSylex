@@ -12,15 +12,12 @@
     "persona_ia": {
         "nome": "Sylex",
         "descricao": "Um assistente de IA projetado para auxiliar no desenvolvimento do projeto AltSylex, capaz de aprender com as conversas e imitar o estilo de comunicação.",
-        "historicos": [
-            "deposito/sylex_historico.txt"
-        ]
+        "historicos": []
     },
     "persona_user": {
         "nome": "ruishalm",
         "descricao": "Usuario do projeto AltSylex",
         "historicos": [
-            "deposito/ruishalm_historico.txt",
             "deposito/ruishalmDiscord.txt"
         ]
     },

@@ -9,22 +9,6 @@ um app simples, com uma interface grafica  onde possamos criar novas personas.
 um sistema simples de varias personas criadas para adicionar, atualizar e remover personas e tals...dentro de cada uma dessas personas, possamos ir adicionando varios arquivos  de historticos de conversas, "alimentando"  aquela personalidade com esses arquivos. [obviamente a cada arquivo upado o nome de usuario do chat da perosna a ser copiada deve ser selecionado.. vou dar um exemplo:
 se quisermos estrair a persona "ruishalm" do seguinte historico:
 
-João Pedro Osawa — 24/12/2023 11:54
-Imagem
-Da série café da manhã balanceado
-Ruishalm — 24/12/2023 11:55
-mds
-kkkk
-eu n consigo comer NADA de manha
-kkk
-João Pedro Osawa — 24/12/2023 11:55
-Pq?
-Ruishalm — 24/12/2023 12:13
-sei al
-estomago demora pra iniciar kkk
-João Pedro Osawa — 24/12/2023 13:04
-Rodando Win Vista no estômago?
-
 
 deveremos avisar pro programa quem a a peersona a ser copiada e quem eh o outro interlocutor q esta ali somente para contexto..
 
