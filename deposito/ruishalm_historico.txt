@@ -1,0 +1,93 @@
+como surgiu a ideias.
+
+seria interessante treinar uma IA para se comportar de determinada forma, copiar o modo de falar e de responder de alguem...
+uma ideia q pensamos seria carregando para a AI textos de chats e historicos de conversas dessa pessoa a fim da ia copia-la.
+
+|assim surgiu a ideia do programa:
+
+um app simples, com uma interface grafica  onde possamos criar novas personas.
+um sistema simples de varias personas criadas para adicionar, atualizar e remover personas e tals...dentro de cada uma dessas personas, possamos ir adicionando varios arquivos  de historticos de conversas, "alimentando"  aquela personalidade com esses arquivos. [obviamente a cada arquivo upado o nome de usuario do chat da perosna a ser copiada deve ser selecionado.. vou dar um exemplo:
+se quisermos estrair a persona "ruishalm" do seguinte historico:
+
+João Pedro Osawa — 24/12/2023 11:54
+Imagem
+Da série café da manhã balanceado
+Ruishalm — 24/12/2023 11:55
+mds
+kkkk
+eu n consigo comer NADA de manha
+kkk
+João Pedro Osawa — 24/12/2023 11:55
+Pq?
+Ruishalm — 24/12/2023 12:13
+sei al
+estomago demora pra iniciar kkk
+João Pedro Osawa — 24/12/2023 13:04
+Rodando Win Vista no estômago?
+
+
+deveremos avisar pro programa quem a a peersona a ser copiada e quem eh o outro interlocutor q esta ali somente para contexto..
+
+entao a cada upload, um indicador de nome de usuario daquela conversa deve ser criado.
+
+apos adicionado, o progralma ira tratar o texto do chat de forma a preparar ele para ser entregue para a AI, 
+
+depois de varios arquivos terem "alimentado" a persona,  poderemos gerar um unico arquivo que vai "conter a personalidade" extraida das conversas para poder ser alimentada para um bot de conversa que ira replicar a forma de falar daquela persona...
+
+deu pra entender?
+no  ponto Upload e Processamento de Históricos:
+ seria interessante adicionarmos um crud basico para quye o usuario p[ossa proc urar e censurar palavras chaves, para evitar vasamento de informacoes sensiveis
+
+1. Gerenciamento de Personas:
+
+ao invez de criar editar e remover, vamos usar os termos Gerar Educar e desviver
+
+vamos dew SQLite..parece ser mais simples usaremos django? so uma sujestao.quero as suas tb
+
+na 3. Preparação para a IA: em Formato de Saída:, json creio ser o melhor por ter maior compatibilidade certo?!
+
+como vamos lidar com napipulacao de arquivos e tals, creio q phyton seria bom
+de interface, o ttkbootstrap acho qlee bem bonito, mas aceito outras sugestoes
+sobre o Escolher o modelo de IA: Qual modelo de IA sera usado?...isso eu nem sei por onde comecar
+para opcoes de censura, creio q Substituição seja o ideal por enquanto.. num futuro podemos ajustar tipos de sencura [senhas, enderecos,  etc] afim de nao perdermos aquela infromacao e manter o contexto da conversa... mas isos eh furuto, iremos comecar ocm substituicao simples 
+
+. Banco de Dados - SQLite e Django:
+
+vamos sem django... sou novato e quero algo simples, gostie da sua sujestao
+tb seria bom cada persona ter um ID gerado automaticamente apr a ela e ela ser o indexador apenas para organizacao
+
+na estrutura do json, eu n sei como funciona treino de conversa de ia, ter o contexto todo da conversa eh importante ou apenas as falas da perosna ja seriam o suficiente apra treinar uma ia?
+
+
+Modelos de Linguagem (LLMs) deepsek eh uma opcao?
+esse Dialogflow tb me pareceu interessante, se for free..
+
+o importante eh que possamos depois entregra-lo a um api  ou a um bot de discord por exemplo...
+
+
+temos um outro ponto importante a considerar tb nesse projeto: sua perccistencia de memoria.
+
+sei q vc n tem uma memoria persistente, porem poderiamos criar um arquivo dentro do nosso projeto onde podemos salvar vc  para mantermos o fluxo de serviso sem eu te q te relembrar de tudo?!
+pera pera pera.. eu errei o repositorio kkkkkkkkkkkk
+
+quanto ao nome, vamos usar o repositorio https://github.com/ruishalm/AltSylex.git
+
+AltSylex vai ser o nome do nosso projeto 
+
+desculpe me ue rro, pode refazer sua acao anterior com essa correcao?
+apenas esses dados que vc mandou para o projeto meoria sao os suficiente para vc lembrar de tudo que falamos aqui numa proxima sessao?!
+calma, quero so mais uma coisa... me gere mais 2 arquivos, que iremos usar para alimentar futuras personas para nosso teste!!!
+
+um dos arquivos, vc esqcoleh a extencao, com minhas falas ate aqui! para podermos usar esse arquivo para copiar a minha persona com oteste..
+
+e outro arquivo com as suas valas para depormos fazer o memso com vc!
+
+e seu nome sera Sylex
+nao nao..vamos ter apenas um sylex_historico e apenas um ruishalm_historico..
+
+vc so vai me enviar em partes divididas xD>>>
+blz.. de vez enquanto vou pedir pra vc me reenviar alguns textos, eh simplismente pra reenviar ta, n precvisa alterar.. quanto eh MUITO texto pra vc gerar, vc corta e manda isso: A code sample in this response was truncated because it exceeded the maximum allowable output. Please use the response carefully. You may also try your question again, selecting a smaller block of code as the context
+
+entao vamos resolver isso compartimentabilizando os envios ok?
+
+me envie o arquivo de memoria atualizado [inclusive com o q te falei agora]

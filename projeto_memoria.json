@@ -3,43 +3,57 @@
     "descricao": "Projeto para criar um aplicativo que permite treinar uma IA para imitar a forma de falar e responder de uma pessoa específica, baseando-se em históricos de conversas.",
     "repositorio": "https://github.com/ruishalm/AltSylex.git",
     "checkpoints": [
-      "Definição das tabelas do banco de dados.",
-      "Implementação do CRUD de palavras-chave.",
-      "Implementação do processamento de históricos.",
-      "Implementação da geração do JSON.",
-      "Criação da estrutura básica da interface gráfica."
+        "Definição das tabelas do banco de dados.",
+        "Implementação do CRUD de palavras-chave.",
+        "Implementação do processamento de históricos.",
+        "Implementação da geração do JSON.",
+        "Criação da estrutura básica da interface gráfica."
     ],
     "persona_ia": {
-      "nome": "Sylex",
-      "descricao": "Um assistente de IA projetado para auxiliar no desenvolvimento do projeto AltSylex, capaz de aprender com as conversas e imitar o estilo de comunicação.",
-      "historicos": [
-        "deposito/sylex_historico.txt"
-      ]
+        "nome": "Sylex",
+        "descricao": "Um assistente de IA projetado para auxiliar no desenvolvimento do projeto AltSylex, capaz de aprender com as conversas e imitar o estilo de comunicação.",
+        "historicos": [
+            "deposito/sylex_historico.txt"
+        ]
     },
     "persona_user": {
-      "nome": "ruishalm",
-      "descricao": "Usuario do projeto AltSylex",
-      "historicos": [
-        "deposito/ruishalm_historico.txt"
-      ]
+        "nome": "ruishalm",
+        "descricao": "Usuario do projeto AltSylex",
+        "historicos": [
+            "deposito/ruishalm_historico.txt",
+            "deposito/ruishalmDiscord.txt"
+        ]
     },
     "decisoes": [
-      "Usar SQLite diretamente (sem Django).",
-      "Substituição simples de palavras-chave por '[CENSURADO]'.",
-      "Gerar JSON com o contexto da conversa.",
-      "Usar ttkbootstrap para a interface gráfica.",
-      "Criar checkpoints de memória.",
-      "Criar a persona 'Sylex' como a primeira persona de IA.",
-      "Os arquivos de histórico (ruishalm_historico.txt e sylex_historico.txt) ficarão na pasta 'deposito'.",
-      "Quando solicitado, reenviar textos exatamente como estão, sem alterações.",
-      "Quando a resposta for muito longa, dividi-la em partes e adicionar a mensagem: 'A code sample in this response was truncated because it exceeded the maximum allowable output. Please use the response carefully. You may also try your question again, selecting a smaller block of code as the context'.",
-      "Não incluir o conteúdo dos arquivos de histórico no arquivo de memória, apenas as referências aos arquivos.",
-      "O usuário está usando o sistema operacional Windows e o editor de código VS Code."
+        "Usar SQLite diretamente (sem Django).",
+        "Substituição simples de palavras-chave por '[CENSURADO]'.",
+        "Gerar JSON com o contexto da conversa.",
+        "Usar ttkbootstrap para a interface gráfica.",
+        "Criar checkpoints de memória.",
+        "Criar a persona 'Sylex' como a primeira persona de IA.",
+        "Os arquivos de histórico (ruishalm_historico.txt e sylex_historico.txt e ruishalmDiscord.txt) ficarão na pasta 'deposito'.",
+        "Quando solicitado, reenviar textos exatamente como estão, sem alterações.",
+        "Quando a resposta for muito longa, dividi-la em partes e adicionar a mensagem: 'A code sample in this response was truncated because it exceeded the maximum allowable output. Please use the response carefully. You may also try your question again, selecting a smaller block of code as the context'.",
+        "Não incluir o conteúdo dos arquivos de histórico no arquivo de memória, apenas as referências aos arquivos.",
+        "O usuário está usando o sistema operacional Windows e o editor de código VS Code.",
+        "O arquivo projeto_memoria.json eh o responsavel pela persistencia de memoria."
     ],
     "proximos_passos": [
-      "Definir as tabelas do banco de dados.",
-      "Implementar as funções básicas de CRUD para as tabelas do banco de dados.",
-      "Implementar a lógica para salvar e carregar a memória dos checkpoints."
+        "Definir as tabelas do banco de dados.",
+        "Implementar as funções básicas de CRUD para as tabelas do banco de dados.",
+        "Implementar a lógica para salvar e carregar a memória dos checkpoints.",
+        "Modificar processador.py para retornar mais dados.",
+        "Criar a funcao gerar_json em processador.py.",
+        "Modificar main.py para testar a funcao gerar_json.",
+        "Pausar a tentativa de correção do JSON.",
+        "Registrar os erros encontrados no JSON.",
+        "Analisar os erros encontrados no JSON."
+    ],
+    "erros_encontrados_json": [
+        "O campo 'fala' está vazio em todas as conversas.",
+        "O campo 'tipo' está incorreto em todas as conversas.",
+        "O campo 'interlocutor' está incorreto em todas as conversas.",
+        "Os cabecalhos estao incorretos.",
+        "O numero de falas esta muito grande."
     ]
-  }
-  
+}
