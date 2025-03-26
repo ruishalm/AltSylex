@@ -34,9 +34,6 @@ class TelaGerenciarPersonas(ttk.Frame):
         self.desviver_persona_button = BotaoOrganico(self.botoes_frame, text="Desviver Persona", command=self.desviver_persona, cursor="hand2")
         self.desviver_persona_button.pack(side=tk.RIGHT, padx=5)
 
-        self.gerar_disco_persona_button = BotaoOrganico(self.botoes_frame, text="Gerar Disco de Persona", command=self.gerar_disco_persona, cursor="hand2")
-        self.gerar_disco_persona_button.pack(side=tk.RIGHT, padx=5)
-
         # Frame para a lista
         self.lista_frame = ttk.Frame(self)
         self.lista_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=10)
@@ -125,11 +122,5 @@ class TelaGerenciarPersonas(ttk.Frame):
                 messagebox.showinfo("Sucesso", "Persona desvivida com sucesso.")
                 self.atualizar_lista_personas()
                 self.persona_selecionada_id = None
-        else:
-            messagebox.showerror("Erro", "Por favor, selecione uma persona.")
-
-    def gerar_disco_persona(self):
-        if self.persona_selecionada_id:
-            self.app.gerar_disco_persona()
         else:
             messagebox.showerror("Erro", "Por favor, selecione uma persona.")

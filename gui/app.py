@@ -7,9 +7,7 @@ from gui.widgets import BotaoOrganico
 from gui.telas.tela_inicial import TelaInicial
 from gui.telas.tela_gerenciar_personas import TelaGerenciarPersonas
 from gui.telas.tela_educar_persona import TelaEducarPersona
-#from gui.telas.tela_censura_palavras import TelaCensuraPalavras #removido
 from gui.telas.tela_gerar_disco_persona import TelaGerarDiscoPersona
-from gui.telas.tela_ver_dados import TelaVerDados
 
 
 class AltSylexApp:
@@ -20,16 +18,16 @@ class AltSylexApp:
 
         # Estilo
         self.style = ttk.Style(theme="darkly")
-        self.style.configure("NavFrame.TFrame", background="black") #configurando o estilo do nav_frame
+        self.style.configure("NavFrame.TFrame", background="black")
 
         # Frame de navegação (Anterior e Home) - TOPO ABSOLUTO
-        self.nav_frame = ttk.Frame(master, style="NavFrame.TFrame") #aplicando o estilo
+        self.nav_frame = ttk.Frame(master, style="NavFrame.TFrame")
         self.nav_frame.pack(side=tk.TOP, fill=tk.X)
 
         # Botão Anterior (Unicode: ←)
         self.anterior_button = ttk.Button(
             self.nav_frame,
-            text="←",  # Seta para a esquerda
+            text="←",
             command=self.anterior,
             state=tk.DISABLED,
             style="link",
@@ -40,7 +38,7 @@ class AltSylexApp:
         # Botão Home (Unicode: 🏠)
         self.home_button = ttk.Button(
             self.nav_frame,
-            text="🏠",  # Casinha
+            text="🏠",
             command=self.mostrar_tela_inicial,
             style="link",
             width=5
@@ -79,32 +77,18 @@ class AltSylexApp:
         tela = TelaGerenciarPersonas(self.main_frame, self)
         tela.pack(fill=tk.BOTH, expand=True)
 
-    def educar_persona(self, persona_id=None): #adicionado o parametro persona_id
+    def educar_persona(self, persona_id=None):
         self.clear_frame()
         self.historico_telas.append(self.educar_persona)
         self.anterior_button.config(cursor="hand2")
-        tela = TelaEducarPersona(self.main_frame, self, persona_id) #adicionado o parametro persona_id
+        tela = TelaEducarPersona(self.main_frame, self, persona_id)
         tela.pack(fill=tk.BOTH, expand=True)
 
-    def censura_palavras(self):
+    def gerar_disco_persona(self): #removido o parametro persona_id
         self.clear_frame()
-        self.historico_telas.append(self.censura_palavras)
+        self.historico_telas.append(self.gerar_disco_persona) #removido o parametro persona_id
         self.anterior_button.config(cursor="hand2")
-        tela = TelaCensuraPalavras(self.main_frame, self)
-        tela.pack(fill=tk.BOTH, expand=True)
-
-    def gerar_disco_persona(self):
-        self.clear_frame()
-        self.historico_telas.append(self.gerar_disco_persona)
-        self.anterior_button.config(cursor="hand2")
-        tela = TelaGerarDiscoPersona(self.main_frame, self)
-        tela.pack(fill=tk.BOTH, expand=True)
-
-    def ver_dados(self):
-        self.clear_frame()
-        self.historico_telas.append(self.ver_dados)
-        self.anterior_button.config(cursor="hand2")
-        tela = TelaVerDados(self.main_frame, self)
+        tela = TelaGerarDiscoPersona(self.main_frame, self) #removido o parametro persona_id
         tela.pack(fill=tk.BOTH, expand=True)
 
     def clear_frame(self):
@@ -119,6 +103,9 @@ class AltSylexApp:
             self.historico_telas.pop()
             if self.historico_telas:
                 tela_anterior = self.historico_telas[-1]
-                tela_anterior()
+                if isinstance(tela_anterior, tuple):
+                    tela_anterior[0](*tela_anterior[1])
+                else:
+                    tela_anterior()
             else:
                 self.mostrar_tela_inicial()
