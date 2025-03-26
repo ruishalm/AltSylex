@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import numpy as np #importado aqui
 from database import get_all_palavras_chave
 
 def extrair_mensagem(linha, formato_cabecalho, persona_nome):
@@ -47,7 +48,7 @@ def processar_historico(conn, caminho_arquivo, persona_id, persona_nome, formato
                         if palavra in mensagem:
                             palavras_censuradas_atual.append(palavra)
                             mensagem = mensagem.replace(palavra, "[CENSURADO]")
-                    
+
                     mensagens.append({
                         "orador": orador,
                         "mensagem": mensagem,

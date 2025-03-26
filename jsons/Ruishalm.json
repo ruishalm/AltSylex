@@ -1,13 +1,13 @@
 {
     "persona": {
-        "nome": "ruishalm",
-        "descricao": "Usuario do projeto"
+        "nome": "Ruishalm",
+        "descricao": "Eu mesmo"
     },
-    "interlocutor": "João Pedro Osawa",
+    "interlocutor": "interlocutor",
     "conversas": [
         {
             "orador": "João Pedro Osawa",
-            "mensagem": "\nParticularmente prefiro 1000xca camelse nomeUsuario pq é mais rápido d escrever :3",
+            "mensagem": "\nParticularmente prefiro 1000x camelcase nomeUsuario pq é mais rápido d escrever :3",
             "fonte": "interlocutor",
             "palavras_censuradas": []
         },

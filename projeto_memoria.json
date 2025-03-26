@@ -7,7 +7,17 @@
         "Implementação do CRUD de palavras-chave.",
         "Implementação do processamento de históricos.",
         "Implementação da geração do JSON.",
-        "Criação da estrutura básica da interface gráfica."
+        "Criação da estrutura básica da interface gráfica.",
+        "Remoção do timestamp da mensagem e correção da fonte.",
+        "Implementação dos botões 'Anterior' e 'Home' no topo da tela.",
+        "Alinhamento dos botões 'Anterior' e 'Home' à esquerda e à direita, respectivamente.",
+        "Aumento do tamanho dos botões 'Anterior' e 'Home'.",
+        "Implementação do Diagrama de Voronoi como fundo da tela.",
+        "Inversão das cores do Diagrama de Voronoi (fundo preto, células pretas, espaço entre as células branco, pontos pretos).",
+        "Aumento do espaço entre as células no Diagrama de Voronoi.",
+        "Adição de uma borda cinza clara às células no Diagrama de Voronoi.",
+        "Remoção do retângulo cinza da barra de navegação superior.",
+        "Correção do erro _tkinter.TclError: unknown option \"-bg\"."
     ],
     "persona_ia": {
         "nome": "Sylex",
@@ -21,6 +31,129 @@
             "deposito/ruishalmDiscord.txt"
         ]
     },
+    "design_interface": {
+        "principios_gerais": {
+            "paleta_de_cores": {
+                "gerar": "Verde",
+                "educar": "Azul",
+                "desviver": "Vermelho",
+                "filtro": "Verde",
+                "disco": "Azul",
+                "banco_de_dados": "Rosa",
+                "voltar": "Verde"
+            },
+            "padrao_voronoi": {
+                "descricao": "Um Diagrama de Voronoi é uma divisão de um plano em regiões, onde cada região é definida por um ponto específico (chamado de 'semente' ou 'gerador'). Todos os pontos dentro de uma região de Voronoi estão mais próximos da sua semente do que de qualquer outra semente.",
+                "bibliotecas": [
+                    "scipy.spatial.Voronoi: A biblioteca SciPy possui um módulo spatial que inclui a classe Voronoi para gerar diagramas de Voronoi.",
+                    "voronoi: Existe uma biblioteca chamada voronoi (disponível no PyPI) que também pode ser usada para gerar diagramas de Voronoi.",
+                    "matplotlib: A biblioteca matplotlib pode ser usada para plotar os diagramas de Voronoi gerados por scipy.spatial.Voronoi ou voronoi."
+                ],
+                "integracao": [
+                    "Fundo da Tela: Podemos usar um diagrama de Voronoi como fundo para as telas do aplicativo, criando um visual interessante e dinâmico.",
+                    "Transições: Podemos usar o diagrama de Voronoi para criar transições entre as telas, animando as regiões do diagrama.",
+                    "Visualização de Dados: Se no futuro tivermos dados que possam ser representados espacialmente, podemos usar um diagrama de Voronoi para visualizar esses dados.",
+                    "Botões: Podemos usar o diagrama de Voronoi para criar botoes."
+                ],
+                "configuracoes_atuais": {
+                    "fundo": "Preto",
+                    "celulas": "Pretas",
+                    "espaco_entre_celulas": "Branco",
+                    "pontos": "Pretos",
+                    "borda_celulas": "Cinza claro (#EEEEEE)",
+                    "espacamento_celulas": "Alto (fator_reducao = 0.85)",
+                    "numero_celulas": 500
+                }
+            }
+        },
+        "tela_inicial": {
+            "objetivo": "Servir como ponto de partida para o usuário, oferecendo acesso rápido às principais funcionalidades.",
+            "titulo": "AltSylex",
+            "botoes": {
+                "gerar_persona": "Gerenciar Personas",
+                "educar_persona": "Educar Persona",
+                "desviver_persona": "Desviver Persona",
+                "filtro_palavras_sensiveis": "Censura de Palavras Sensíveis",
+                "gerar_disco_persona": "Gerar Disco de Persona",
+                "interagir_banco_dados": "Ver Dados"
+            },
+            "layout": "Os botões principais ('Gerenciar Personas', 'Educar Persona', 'Censura de Palavras Sensíveis', 'Gerar Disco de Persona', 'Ver Dados') estão na tela."
+        },
+        "tela_gerenciamento_personas": {
+            "objetivo": "Permitir que o usuário crie, edite, visualize e remova personas, e gerencie seus históricos.",
+            "lista_personas": "Lista de Personas.",
+            "botoes": {
+                "gerar_persona": "Gerar Persona",
+                "educar_persona": "Educar Persona",
+                "desviver_persona": "Desviver Persona",
+                "adicionar_historico": "Adicionar Histórico",
+                "remover_historico": "Remover Histórico",
+                "voltar": "Voltar"
+            },
+            "formulario_nova_editar_persona": "Formulário para criar ou editar uma persona.",
+            "lista_historicos": "Lista de históricos da persona.",
+            "informacoes": {
+                "nome_persona": "Nome da Persona.",
+                "descricao_persona": "Descrição da Persona.",
+                "lista_historicos": "Lista de Históricos."
+            },
+            "acoes": [
+                "Gerar uma nova persona.",
+                "Educar uma persona existente.",
+                "Desviver uma persona.",
+                "Adicionar um histórico a uma persona.",
+                "Remover um histórico de uma persona.",
+                "Voltar para a tela inicial."
+            ]
+        },
+        "tela_filtro_palavras_sensiveis": {
+            "objetivo": "Permitir que o usuário adicione, visualize e remova palavras-chave censuradas.",
+            "lista_palavras_chave": "Lista de palavras-chave.",
+            "botoes": {
+                "nova_palavra_chave": "Nova Palavra-Chave",
+                "remover_palavra_chave": "Remover Palavra-Chave",
+                "voltar": "Voltar"
+            },
+            "campo_nova_palavra_chave": "Campo para adicionar uma nova palavra-chave.",
+            "informacoes": "Lista de palavras-chave.",
+            "acoes": [
+                "Adicionar uma nova palavra-chave.",
+                "Remover uma palavra-chave.",
+                "Voltar para a tela inicial."
+            ]
+        },
+        "tela_gerar_disco_persona": {
+            "objetivo": "Permitir que o usuário selecione uma persona e gere o JSON correspondente.",
+            "selecao_persona": "Seleção de Persona.",
+            "botoes": {
+                "gerar_disco_persona": "Gerar Disco de Persona",
+                "voltar": "Voltar"
+            },
+            "informacoes": {
+                "mensagem_sucesso_erro": "Mensagem de sucesso ou erro.",
+                "caminho_arquivo_json": "Caminho do arquivo JSON."
+            },
+            "acoes": [
+                "Selecionar uma persona.",
+                "Gerar o JSON para a persona selecionada.",
+                "Voltar para a tela inicial."
+            ]
+        },
+        "tela_interacao_banco_dados": {
+            "objetivo": "Permitir que o usuário interaja com o banco de dados.",
+            "lista_tabelas": "Lista de tabelas.",
+            "lista_dados": "Lista de dados da tabela.",
+            "botoes": {
+                "voltar": "Voltar"
+            },
+            "informacoes": "Dados da tabela selecionada.",
+            "acoes": [
+                "Selecionar uma tabela.",
+                "Visualizar os dados da tabela selecionada.",
+                "Voltar para a tela inicial."
+            ]
+        }
+    },
     "decisoes": [
         "Usar SQLite diretamente (sem Django).",
         "Substituição simples de palavras-chave por '[CENSURADO]'.",
@@ -33,7 +166,22 @@
         "Quando a resposta for muito longa, dividi-la em partes e adicionar a mensagem: 'A code sample in this response was truncated because it exceeded the maximum allowable output. Please use the response carefully. You may also try your question again, selecting a smaller block of code as the context'.",
         "Não incluir o conteúdo dos arquivos de histórico no arquivo de memória, apenas as referências aos arquivos.",
         "O usuário está usando o sistema operacional Windows e o editor de código VS Code.",
-        "O arquivo projeto_memoria.json eh o responsavel pela persistencia de memoria."
+        "O arquivo projeto_memoria.json eh o responsavel pela persistencia de memoria.",
+        "Substituir 'Criar Persona' por 'Gerar Persona'.",
+        "Substituir 'Editar Persona' por 'Educar Persona'.",
+        "Substituir 'Remover Persona' por 'Desviver Persona'.",
+        "Substituir 'Gerenciar Palavras-Chave' por 'Filtro de Palavras Sensíveis'.",
+        "Substituir 'Gerar JSON' por 'Gerar Disco de Persona'.",
+        "Adicionar uma chave 'instrucoes' no JSON, com um texto explicando como a IA deve interpretar o JSON.",
+        "Implementação dos botões 'Anterior' e 'Home' no topo da tela.",
+        "Alinhamento dos botões 'Anterior' e 'Home' à esquerda e à direita, respectivamente.",
+        "Aumento do tamanho dos botões 'Anterior' e 'Home'.",
+        "Implementação do Diagrama de Voronoi como fundo da tela.",
+        "Inversão das cores do Diagrama de Voronoi (fundo preto, células pretas, espaço entre as células branco, pontos pretos).",
+        "Aumento do espaço entre as células no Diagrama de Voronoi.",
+        "Adição de uma borda cinza clara às células no Diagrama de Voronoi.",
+        "Remoção do retângulo cinza da barra de navegação superior.",
+        "Correção do erro _tkinter.TclError: unknown option \"-bg\"."
     ],
     "proximos_passos": [
         "Definir as tabelas do banco de dados.",
@@ -44,13 +192,23 @@
         "Modificar main.py para testar a funcao gerar_json.",
         "Pausar a tentativa de correção do JSON.",
         "Registrar os erros encontrados no JSON.",
-        "Analisar os erros encontrados no JSON."
-    ],
-    "erros_encontrados_json": [
-        "O campo 'fala' está vazio em todas as conversas.",
-        "O campo 'tipo' está incorreto em todas as conversas.",
-        "O campo 'interlocutor' está incorreto em todas as conversas.",
-        "Os cabecalhos estao incorretos.",
-        "O numero de falas esta muito grande."
+        "Analisar os erros encontrados no JSON.",
+        "Remover o timestamp da mensagem e corrigir a fonte.",
+        "Começar a desenvolver a interface gráfica usando ttkbootstrap.",
+        "Implementar a tela inicial.",
+        "Implementar a tela de gerenciamento de personas (Gerar/Educar/Desviver).",
+        "Implementar a tela de filtro de palavras sensíveis.",
+        "Implementar a tela de gerar disco de persona.",
+        "Implementar a tela de interacao com o banco de dados.",
+        "Implementar as funcionalidades das telas:",
+        "gui/telas/tela_gerenciar_personas.py: criar_persona(), desviver_persona(), educar_persona(), listar personas e listar historicos.",
+        "gui/telas/tela_educar_persona.py: adicionar_historico(), processar_historico().",
+        "gui/telas/tela_censura_palavras.py: Adicionar/remover palavras-chave, listar palavras-chave.",
+        "gui/telas/tela_gerar_disco_persona.py: Selecionar persona, gerar_disco_persona().",
+        "gui/telas/tela_ver_dados.py: Listar tabelas, listar dados.",
+        "Melhorar a usabilidade e acessibilidade.",
+        "Implementar os \"nervos\".",
+        "Melhorar o design dos botões.",
+        "Refatorar e otimizar o código."
     ]
 }

@@ -77,3 +77,44 @@ def get_all_palavras_chave(conn):
     cur = conn.cursor()
     cur.execute("SELECT * FROM palavra_chave")
     return cur.fetchall()
+
+def get_all_personas(conn):
+    """Busca todas as personas."""
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM persona")
+    return cur.fetchall()
+
+def delete_persona(conn, persona_id):
+    """Exclui uma persona pelo ID."""
+    cur = conn.cursor()
+    cur.execute("DELETE FROM persona WHERE id=?", (persona_id,))
+    conn.commit()
+
+def check_persona_exists(conn, nome):
+    """Verifica se uma persona com o nome especificado já existe."""
+    cur = conn.cursor()
+    cur.execute("SELECT 1 FROM persona WHERE nome=?", (nome,))
+    return cur.fetchone() is not None
+
+def get_historicos_by_persona_id(conn, persona_id):
+    """Busca todos os históricos de uma persona pelo ID."""
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM historico WHERE persona_id=?", (persona_id,))
+    return cur.fetchall()
+
+def create_palavra_chave(conn, palavra):
+    """Cria uma nova palavra-chave no banco de dados."""
+    sql = """
+        INSERT INTO palavra_chave(palavra)
+        VALUES(?)
+    """
+    cur = conn.cursor()
+    cur.execute(sql, (palavra,))
+    conn.commit()
+    return cur.lastrowid
+
+def delete_palavra_chave(conn, palavra):
+    """Exclui uma palavra-chave do banco de dados."""
+    cur = conn.cursor()
+    cur.execute("DELETE FROM palavra_chave WHERE palavra=?", (palavra,))
+    conn.commit()
