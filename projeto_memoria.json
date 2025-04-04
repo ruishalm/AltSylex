@@ -206,10 +206,8 @@
         "Redução do tamanho das listas."
     ],
     "proximos_passos": [
-        "Implementar a tela `TelaGerarDiscoPersona`.",
-        "Implementar a tela `TelaVerDados`.",
+       
         "Melhorar a usabilidade e acessibilidade.",
-        "Implementar os \"nervos\".",
         "Melhorar o design dos botões.",
         "Refatorar e otimizar o código."
     ],

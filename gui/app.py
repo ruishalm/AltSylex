@@ -8,6 +8,7 @@ from gui.telas.tela_inicial import TelaInicial
 from gui.telas.tela_gerenciar_personas import TelaGerenciarPersonas
 from gui.telas.tela_educar_persona import TelaEducarPersona
 from gui.telas.tela_gerar_disco_persona import TelaGerarDiscoPersona
+from gerenciador_arquivos import GerenciadorArquivos #importando o gerenciador de arquivos
 
 
 class AltSylexApp:
@@ -15,6 +16,7 @@ class AltSylexApp:
         self.master = master
         master.title("AltSylex")
         self.conn = conn
+        self.gerenciador_arquivos = GerenciadorArquivos(os.path.dirname(__file__) + "/../") #criando o gerenciador de arquivos
 
         # Estilo
         self.style = ttk.Style(theme="darkly")

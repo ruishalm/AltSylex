@@ -1,8 +1,7 @@
-import os
 import re
 import json
-import numpy as np #importado aqui
 from database import get_all_palavras_chave
+from gerenciador_arquivos import GerenciadorArquivos  # Importando o GerenciadorArquivos
 
 def extrair_mensagem(linha, formato_cabecalho, persona_nome):
     """Extrai o nome do orador e o conteúdo da mensagem de uma linha."""
@@ -27,46 +26,41 @@ def extrair_mensagem(linha, formato_cabecalho, persona_nome):
             "mensagem": linha.strip()
         }
 
-def processar_historico(conn, caminho_arquivo, persona_id, persona_nome, formato_cabecalho):
-    """Processa um arquivo de histórico, linha por linha."""
-    caminho_absoluto = os.path.join(os.path.dirname(__file__), caminho_arquivo)
+def processar_historico(conn, conteudo_arquivo, persona_id, persona_nome, formato_cabecalho):
+    """Processa um conteúdo de histórico, linha por linha."""
     palavras_chave = get_all_palavras_chave(conn)
     palavras_censuradas = [palavra[1] for palavra in palavras_chave]
     mensagens = []
     try:
-        with open(caminho_absoluto, "r", encoding="utf-8") as f:
-            for linha in f:
-                linha = linha.strip()
-                dados_mensagem = extrair_mensagem(linha, formato_cabecalho, persona_nome)
-                if dados_mensagem:
-                    orador = dados_mensagem["orador"]
-                    mensagem = dados_mensagem["mensagem"].strip()
-                    # Nova lógica para definir a fonte
-                    fonte = "persona" if orador.lower() == persona_nome.lower() else "interlocutor"
-                    palavras_censuradas_atual = []
-                    for palavra in palavras_censuradas:
-                        if palavra in mensagem:
-                            palavras_censuradas_atual.append(palavra)
-                            mensagem = mensagem.replace(palavra, "[CENSURADO]")
+        for linha in conteudo_arquivo.splitlines():  # Processa o conteúdo linha por linha
+            linha = linha.strip()
+            dados_mensagem = extrair_mensagem(linha, formato_cabecalho, persona_nome)
+            if dados_mensagem:
+                orador = dados_mensagem["orador"]
+                mensagem = dados_mensagem["mensagem"].strip()
+                # Nova lógica para definir a fonte
+                fonte = "persona" if orador.lower() == persona_nome.lower() else "interlocutor"
+                palavras_censuradas_atual = []
+                for palavra in palavras_censuradas:
+                    if palavra in mensagem:
+                        palavras_censuradas_atual.append(palavra)
+                        mensagem = mensagem.replace(palavra, "[CENSURADO]")
 
-                    mensagens.append({
-                        "orador": orador,
-                        "mensagem": mensagem,
-                        "fonte": fonte,
-                        "palavras_censuradas": palavras_censuradas_atual
-                    })
-                else:
-                    if mensagens:
-                        mensagens[-1]["mensagem"] += "\n" + linha
+                mensagens.append({
+                    "orador": orador,
+                    "mensagem": mensagem,
+                    "fonte": fonte,
+                    "palavras_censuradas": palavras_censuradas_atual
+                })
+            else:
+                if mensagens:
+                    mensagens[-1]["mensagem"] += "\n" + linha
         return mensagens
-    except FileNotFoundError:
-        print(f"Erro: Arquivo não encontrado: {caminho_absoluto}")
-        return []
     except Exception as e:
-        print(f"Erro ao processar o arquivo: {e}")
+        print(f"Erro ao processar o conteúdo: {e}")
         return []
 
-def gerar_json(falas, persona_nome, persona_descricao, interlocutor_nome, caminho_arquivo):
+def gerar_json(falas, persona_nome, persona_descricao, interlocutor_nome, caminho_arquivo, gerenciador_arquivos):
     """Gera um arquivo JSON com as conversas."""
     estrutura_json = {
         "persona": {
@@ -76,7 +70,6 @@ def gerar_json(falas, persona_nome, persona_descricao, interlocutor_nome, caminh
         "interlocutor": interlocutor_nome,
         "conversas": falas
     }
-    with open(caminho_arquivo, "w", encoding="utf-8") as f:
-        json.dump(estrutura_json, f, indent=4, ensure_ascii=False)
+    gerenciador_arquivos.escrever_json(caminho_arquivo, estrutura_json) # Usa o gerenciador para escrever o JSON
 
     return caminho_arquivo

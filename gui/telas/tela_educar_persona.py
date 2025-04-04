@@ -3,9 +3,9 @@ import ttkbootstrap as ttk
 from gui.widgets import BotaoOrganico
 from tkinter import messagebox, filedialog
 import database
-import shutil
 import os
 import processador
+from gerenciador_arquivos import GerenciadorArquivos  # Importando o GerenciadorArquivos
 
 class TelaEducarPersona(ttk.Frame):
     def __init__(self, master, app, persona_id=None):
@@ -17,6 +17,7 @@ class TelaEducarPersona(ttk.Frame):
         self.persona_nome = self.get_persona_nome()
         self.historico_selecionado = None
         self.historico_processado_selecionado = None
+        self.gerenciador_arquivos = GerenciadorArquivos(os.path.dirname(__file__) + "/../../") #criando o gerenciador de arquivos
         self.create_widgets()
         self.atualizar_lista_historicos()
         self.atualizar_lista_historicos_processados()
@@ -115,12 +116,10 @@ class TelaEducarPersona(ttk.Frame):
         if self.persona_id:
             caminho_arquivo_original = filedialog.askopenfilename(title="Selecionar Arquivo de Histórico", filetypes=[("Arquivos de Texto", "*.txt")])
             if caminho_arquivo_original:
-                pasta_historicos = os.path.join(os.path.dirname(__file__), "..", "..", "historicos")
-                os.makedirs(pasta_historicos, exist_ok=True)
                 nome_arquivo = os.path.basename(caminho_arquivo_original)
                 novo_nome_arquivo = f"{self.persona_id}_{nome_arquivo}"
-                caminho_arquivo_destino = os.path.join(pasta_historicos, novo_nome_arquivo)
-                shutil.copy2(caminho_arquivo_original, caminho_arquivo_destino)
+                caminho_arquivo_destino = os.path.join(self.gerenciador_arquivos.historicos_dir, novo_nome_arquivo)
+                self.gerenciador_arquivos.copiar_arquivo(caminho_arquivo_original, caminho_arquivo_destino)
                 historico = (self.persona_id, caminho_arquivo_destino)
                 database.create_historico(self.conn, historico)
                 messagebox.showinfo("Sucesso", f"Histórico adicionado para a persona com ID {self.persona_id}.")
@@ -134,6 +133,7 @@ class TelaEducarPersona(ttk.Frame):
         if self.historico_selecionado:
             resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja remover este histórico?")
             if resposta:
+                self.gerenciador_arquivos.excluir_arquivo(self.historico_selecionado[2])
                 cur = self.conn.cursor()
                 cur.execute("DELETE FROM historico WHERE id=?", (self.historico_selecionado[0],))
                 self.conn.commit()
@@ -146,14 +146,15 @@ class TelaEducarPersona(ttk.Frame):
     def processar_historico(self):
         if self.historico_selecionado:
             caminho_arquivo = self.historico_selecionado[2]
+            conteudo_arquivo = self.gerenciador_arquivos.ler_arquivo(caminho_arquivo)
             persona = database.get_persona(self.conn, self.persona_id)
             persona_nome = persona[1]
             persona_descricao = persona[2]
-            mensagens = processador.processar_historico(self.conn, caminho_arquivo, self.persona_id, persona_nome, "Nome — Timestamp")
+            mensagens = processador.processar_historico(self.conn, conteudo_arquivo, self.persona_id, persona_nome, "Nome — Timestamp")
             nome_arquivo = os.path.basename(caminho_arquivo)
             nome_arquivo_sem_extensao = os.path.splitext(nome_arquivo)[0]
-            caminho_json = os.path.join(os.path.dirname(__file__), "..", "..", "jsons", f"{nome_arquivo_sem_extensao}.json")
-            processador.gerar_json(mensagens, persona_nome, persona_descricao, "interlocutor", caminho_json)
+            caminho_json = self.gerenciador_arquivos.gerar_caminho_json(nome_arquivo_sem_extensao)
+            processador.gerar_json(mensagens, persona_nome, persona_descricao, "interlocutor", caminho_json, self.gerenciador_arquivos)
             messagebox.showinfo("Sucesso", f"Histórico processado e salvo em {caminho_json}")
             self.atualizar_lista_historicos_processados()
         else:
@@ -163,8 +164,7 @@ class TelaEducarPersona(ttk.Frame):
         if self.historico_processado_selecionado:
             resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja remover este histórico processado?")
             if resposta:
-                caminho_json = self.historico_processado_selecionado
-                os.remove(caminho_json)
+                self.gerenciador_arquivos.excluir_arquivo(self.historico_processado_selecionado)
                 messagebox.showinfo("Sucesso", "Histórico processado removido com sucesso.")
                 self.atualizar_lista_historicos_processados()
                 self.historico_processado_selecionado = None
@@ -219,10 +219,9 @@ class TelaEducarPersona(ttk.Frame):
 
     def atualizar_lista_historicos_processados(self):
         self.lista_historicos_processados.delete(0, tk.END)
-        pasta_jsons = os.path.join(os.path.dirname(__file__), "..", "..", "jsons")
-        arquivos_json = [f for f in os.listdir(pasta_jsons) if os.path.isfile(os.path.join(pasta_jsons, f)) and f.endswith(".json")]
+        arquivos_json = self.gerenciador_arquivos.listar_arquivos(self.gerenciador_arquivos.jsons_dir, ".json")
         for arquivo_json in arquivos_json:
-            self.lista_historicos_processados.insert(tk.END, os.path.join(pasta_jsons, arquivo_json))
+            self.lista_historicos_processados.insert(tk.END, arquivo_json)
 
     def selecionar_historico_processado(self, event):
         try:
