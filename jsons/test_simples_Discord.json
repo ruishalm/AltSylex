@@ -1,0 +1,29 @@
+{
+    "persona": {
+        "nome": "Teste",
+        "descricao": "Persona para teste"
+    },
+    "interlocutor": "interlocutor",
+    "conversas": [
+        {
+            "orador": "Teste",
+            "mensagem": "João Pedro Osawa — 10:00 Mensagem do João",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Teste",
+            "mensagem": "Ruishalm — 10:05 Mensagem do Ruishalm",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "João Pedro Osawa —  Mensagem do bem",
+            "mensagem": "complexa",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Teste",
+            "mensagem": "Ruishalm — 10:07 Mensagem do Ruishalmcom as complexidades - separadas por hifem",
+            "palavras_censuradas": []
+        }
+    ]
+}

@@ -146,17 +146,15 @@ class TelaEducarPersona(ttk.Frame):
     def processar_historico(self):
         if self.historico_selecionado:
             caminho_arquivo = self.historico_selecionado[2]
-            conteudo_arquivo = self.gerenciador_arquivos.ler_arquivo(caminho_arquivo)
             persona = database.get_persona(self.conn, self.persona_id)
             persona_nome = persona[1]
             persona_descricao = persona[2]
-            mensagens = processador.processar_historico(self.conn, conteudo_arquivo, self.persona_id, persona_nome, "Nome — Timestamp")
-            nome_arquivo = os.path.basename(caminho_arquivo)
-            nome_arquivo_sem_extensao = os.path.splitext(nome_arquivo)[0]
-            caminho_json = self.gerenciador_arquivos.gerar_caminho_json(nome_arquivo_sem_extensao)
-            processador.gerar_json(mensagens, persona_nome, persona_descricao, "interlocutor", caminho_json, self.gerenciador_arquivos)
-            messagebox.showinfo("Sucesso", f"Histórico processado e salvo em {caminho_json}")
-            self.atualizar_lista_historicos_processados()
+            caminho_json = processador.processar_historico_completo(self.conn, caminho_arquivo, self.persona_id, persona_nome, persona_descricao, self.gerenciador_arquivos)
+            if caminho_json:
+                messagebox.showinfo("Sucesso", f"Histórico processado e salvo em {caminho_json}")
+                self.atualizar_lista_historicos_processados()
+            else:
+                messagebox.showerror("Erro", "Erro ao processar o histórico.")
         else:
             messagebox.showerror("Erro", "Nenhum histórico selecionado.")
 

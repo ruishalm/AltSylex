@@ -1,0 +1,64 @@
+{
+    "persona": {
+        "nome": "Teste",
+        "descricao": "Persona para teste"
+    },
+    "interlocutor": "interlocutor",
+    "conversas": [
+        {
+            "orador": "Teste",
+            "mensagem": "",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Osawa",
+            "mensagem": "Só q ainda to aprendendo o jogo, ele é bem complicadim",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Osawa",
+            "mensagem": "Tem muita coisa pra otimizar :x",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Osawa",
+            "mensagem": "<Mídia oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Ruishalm",
+            "mensagem": "<Mídia: oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Ruishalm",
+            "mensagem": "<Mídia oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Ruishalm",
+            "mensagem": "<Mídia oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Osawa",
+            "mensagem": "<Mídia oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Osawa",
+            "mensagem": "<Mídia - oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Ruishalm",
+            "mensagem": "<Mídia oculta>",
+            "palavras_censuradas": []
+        },
+        {
+            "orador": "Osawa",
+            "mensagem": "Labirintite dá sono assim?",
+            "palavras_censuradas": []
+        }
+    ]
+}
